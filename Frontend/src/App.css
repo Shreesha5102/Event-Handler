@@ -1,0 +1,149 @@
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.App {
+  height: 100%;
+}
+
+.navbar{
+  height: 75px;
+  background-color: #222222;
+  margin-bottom: 0px;
+  border: none;
+}
+
+.navbar img{
+  border: none;
+  border-radius: 50%;
+}
+
+.navbar-right {
+  margin-top: 10px;
+}
+
+.navbar-toggle {
+  margin-top: 20px;
+}
+
+.navbar-collapse {
+  background-color: #222222;
+  border-top: none;
+}
+
+.glyphicon-user, .glyphicon-log-in ,.navbar-right{
+  color: white;
+}
+
+button, input, optgroup, select, textarea {
+  color: none;
+}
+
+.thumbnail {
+  border: none;
+}
+
+#logincontainer {
+  margin-top: 20px;
+}
+
+#form_container {
+  margin-top: 10px ;
+  border: 1px solid rgb(239, 243, 239);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#logo {
+  padding: 25px;
+}
+
+#loginform {
+  padding: 20px 20px 50px 20px;
+}
+
+#form_heading {
+  margin: 30px;
+  padding: 10px 20px 20px 20px;
+  color: #c30101;
+  text-align: center;
+}
+
+
+.input-group{
+  width: 300px;
+  padding: 5px;
+  margin: 10px;
+}
+
+.input-group input {
+  width: 250px;
+  height: 45px;
+}
+
+.input-group input::placeholder {
+  font-weight: bold;
+}
+
+.input-group i {
+  color: #c30101;
+}
+
+.btn-danger {
+  margin-left: 20px;
+}
+
+footer {
+  clear: both;
+  width: 100%;
+  position: relative;
+  bottom: 0px;
+  color: White;
+  background: #0088cc ;
+}
+
+#profile {
+  display: block;
+  background-color: #0088cc;
+  color: white;
+  margin-top: 75px;
+  padding: 30px;
+}
+
+#profile-container {
+  margin: 0px 20px 0px 20px;
+}
+
+#profile-dp {
+  display: contents;
+  width: 400px;
+  height: 300px;
+  border: none;
+  border-radius: 50%;
+}
+
+#profile-dp img{
+  border: none;
+  border-radius: 50%;
+}
+
+#lecture-details {
+  padding:  20px;
+}
+
+#lecture-details p{
+  font-weight: 300;
+}
+
+.panel-group {
+  padding: 30px;
+}
+
+.panel-default {
+  margin-top: 10px ;
+}
+
+.panel-heading {
+  padding: 20px;
+}

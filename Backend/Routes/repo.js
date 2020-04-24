@@ -1,24 +1,37 @@
 const express = require('express');
-const router =express.Router();
-const repo1= require('../Models/repo1');
+const router = express.Router();
+const repo1 = require('../Models/repo1');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads/');
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname );
+    }
+});
+const uploads = multer( {
+    storage: storage
+} );
 
 router.get('/', async (req,res) => {
 try{
     console.log("Entries in DB")
     const reppo = await repo1.find();
-      console.log(reppo);
       res.json(reppo);
     }catch(err){
         res.json({message:err});
     }
 });
 
-router.post('/', async (req,res) => {
+router.post('/', uploads.single('certificate'), async (req,res) => {
+    console.log(req.body);
     const repo = new repo1({
-        title: req.body.title[0],
-        venue: req.body.venue[0],
-        date: req.body.date[0],
-        
+        title: req.body.title,
+        venue: req.body.venue,
+        date: req.body.date,
+        certificate: req.file.path
         });
    try{
         console.log("Posted");
@@ -27,7 +40,6 @@ router.post('/', async (req,res) => {
         console.log(savedrepo);
    }catch(err){
        res.json({message: err});
-
    }
 });
 router.get('/:postId',async (req,res)=>{

@@ -137,7 +137,9 @@ class Data extends Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Button type="Submit">Submit</Button>
+                        <Col>
+                            <Button type="Submit">Submit</Button>
+                        </Col>
                     </Row>
                 </Form>
             <div>

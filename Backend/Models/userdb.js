@@ -1,6 +1,24 @@
 const mongoose = require('mongoose');
 
-const userSchema = mongoose.Schema({
+var repo1Schema = mongoose.Schema({
+    title:{
+        type: String,
+        required: true
+    },
+    venue:{
+        type: String,
+        required: true
+    },
+    date:{
+        type: Date,
+        default: Date.now
+    },
+    certificate:{
+        type: String
+    }
+});
+
+var userSchema = mongoose.Schema({
     username: {
         type: String,
         required: true
@@ -24,7 +42,9 @@ const userSchema = mongoose.Schema({
     profile_pic: {
         type: String,
         required: true
-    }
+    },
+    events: [ repo1Schema ]
+
 });
 
 module.exports = mongoose.model('user', userSchema);

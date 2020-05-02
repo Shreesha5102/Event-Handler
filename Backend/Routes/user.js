@@ -20,8 +20,8 @@ const uploads = multer({
 router.get("/:username", async (req,res) =>{
     const user_name = req.params.username; 
     try{
-        const user = await userdetails.find( { username: user_name} );
-        res.json(user[0]);
+        const user = await userdetails.findOne( { username: user_name} );
+        res.json(user);
     }catch(err){
         res.json({message: err});
     }

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const repo1 = require('../Models/repo1');
+const repo1 = require('../Models/userdb');
 const multer = require('multer');
 
 const storage = multer.diskStorage({
@@ -25,20 +25,27 @@ try{
     }
 });
 
-router.post('/', uploads.single('certificate'), async (req,res) => {
+router.post('/:username', uploads.single('certificate'), async (req,res) => {
     console.log(req.body);
-    const repo = new repo1({
+    const repo = {
         title: req.body.title,
         venue: req.body.venue,
         date: req.body.date,
         certificate: req.file.path
-        });
+        };
    try{
         console.log("Posted");
-        const savedrepo = await repo.save();
-        res.json(savedrepo);
-        console.log(savedrepo);
+        const user_name = req.params.username;
+        //Finding the User
+        var updateEvents = await repo1.findOne( {username: user_name} );
+        //updating Events Array
+        updateEvents.events.push( repo );
+        //Saving the Updated Array
+        const savedrepo = await updateEvents.save();
+        //Sending Events Array as response
+        res.json(savedrepo.events);
    }catch(err){
+       console.log("In catch");
        res.json({message: err});
    }
 });

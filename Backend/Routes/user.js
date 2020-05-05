@@ -21,6 +21,7 @@ router.get("/:username", async (req,res) =>{
     const user_name = req.params.username; 
     try{
         const user = await userdetails.findOne( { username: user_name} );
+        console.log(user);
         res.json(user);
     }catch(err){
         res.json({message: err});

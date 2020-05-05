@@ -1,21 +1,43 @@
 body{
   font-family: 'Baloo Paaji 2', cursive;
 }
+/* Navbar component*/
 .navbar {
   margin-left: auto !important;
   margin-right: auto !important;
 }
 
-.mr-auto {
-  margin-left: auto ;
-  margin-right: 0px !important;
+.navbar-brand{
+  margin-left: 10% !important;
 }
 
+.mr-auto {
+  margin-left: auto ;
+  margin-right: 10% !important;
+}
+
+/* User Component*/
 #user{
   background-color: #4585f3;
+  margin-top: 56px !important;
+  padding-top: 10px;
+  height: 225px;
 }
+
+.rounded-circle{
+  padding-left: 10% !important;
+  padding-right: 10% !important;
+  height: 200px;
+}
+
 #user-info {
   margin-left: 20% !important;
   margin-right: 20% !important;
   color: #414246;
+}
+
+/* Form Component*/
+#form {
+  margin-left: 20% !important;
+  margin-right: 20% !important;
 }

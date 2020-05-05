@@ -36,7 +36,7 @@ app.use(function (req, res, next) {
     next();
 });
 app.use('/uploads', express.static('uploads'));
-app.use('/profilePictures', express.static('profilePictures'));
+app.use('/profilePicture', express.static('profilePicture'));
 //User Db 
 app.use('/repo', repoRoutes);
 //User details

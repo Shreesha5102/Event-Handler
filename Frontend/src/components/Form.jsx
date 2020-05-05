@@ -79,7 +79,10 @@ class Data extends Component {
     render() { 
        
         return ( 
-            <div>
+            <div id="form">
+                <Row>
+                    <h3>Enter the Details</h3>
+                </Row>
                 <Form onSubmit={event => this.postDetails(event)}>
                     <Row>
                         <Col>
@@ -88,7 +91,7 @@ class Data extends Component {
                                   <InputGroup.Text id="basic-addon1">Title</InputGroup.Text>
                                 </InputGroup.Prepend>
                                 <FormControl
-                                  placeholder="Title"
+                                  placeholder="Ex: BMSCE hackathon"
                                   aria-describedby="basic-addon1"
                                   name="title"
                                   onChange={event => this.handlechange(event)}
@@ -99,7 +102,7 @@ class Data extends Component {
                         <Col>
                             <InputGroup className="mb-3">
                                 <FormControl
-                                  placeholder="Venue"
+                                  placeholder="Ex: BSN Hall"
                                   aria-describedby="basic-addon1"
                                   name="venue"
                                   onChange={event => this.handlechange(event)}
@@ -131,7 +134,7 @@ class Data extends Component {
                             <Form.File id="formcheck-api-custom" custom>
                               <Form.File.Input onChange={event => {this.handleFileUpload(event)}}/>
                               <Form.File.Label data-browse="Choose">
-                                Select Certificate Image
+                                Select Certificate
                               </Form.File.Label>
                             </Form.File>
                         </Col>

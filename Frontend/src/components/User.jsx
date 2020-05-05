@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Col, Row, Container, Image} from 'react-bootstrap';
-import Face from '../images/Sandeepsir.jpg';
 
 class User extends Component {
     constructor(props) {
@@ -11,7 +10,8 @@ class User extends Component {
             username: "Dr. Sandeep Verma N",
             designation: "",
             date_of_joining: "",
-            course: ""
+            course: "",
+            prof_pic: ""
          }
     }
 
@@ -35,11 +35,13 @@ class User extends Component {
                  username: data.username,
                  designation: data.designation,
                  date_of_joining: date,
-                 course: data.course
+                 course: data.course,
+                 prof_pic: data.profile_pic
              });
          })
     }
     render() { 
+        var Face = " http://localhost:4000/" + this.state.prof_pic;
         return ( 
             <Container fluid id="user">
                 <Row id="user-info">

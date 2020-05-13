@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import {Row, Col, Button} from 'react-bootstrap';
-import {Router} from 'react-router';
+import {Row, Col, Button, Container} from 'react-bootstrap';
+import {BrowserRouter as Router, Switch, Route} from 'react-router';
+import { Link } from 'react-router-dom';
+import Data from './Form';
 
 class Content extends Component {
     constructor(props) {
@@ -10,8 +12,11 @@ class Content extends Component {
          }
     }
     render() { 
+        const linkStyle = {
+            color: 'black'
+        }
         return ( 
-            <div id="Content">
+            <Container id="Content">
                 <Row>
                     <h2></h2>
                 </Row>
@@ -19,20 +24,30 @@ class Content extends Component {
                     <Col xs={4} md={4}>
                     </Col>
                     <Col xs={4} md={4}>
-                        <Button variant="dark" > 
-                            <i class="fa fa-book" aria-hidden="true"></i><br></br>
-                            Add Events
-                        </Button>
-                        <Button variant="dark">
-                            <i class="fa fa-eye" aria-hidden="true"></i><br></br>
-                            View Events
-                        </Button>
+                        <Row>
+                            <Col xs={6} md={6}>
+                                <Link style={linkStyle} to="/add">
+                                    <Button variant="light"> 
+                                        <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i><br></br>
+                                        Add Events
+                                    </Button>
+                                </Link>
+                            </Col>
+                            <Col xs={6} md={6}>
+                                <Link style={linkStyle} to="/view">
+                                    <Button variant="light"> 
+                                        <i class="fa fa-eye fa-2x" aria-hidden="true"></i><br></br>
+                                        View Events
+                                    </Button>
+                                </Link>
+                            </Col>
+                        </Row>
                     </Col>
                     <Col xs={4} md={4}>
                     </Col>
                     
                 </Row>
-            </div>
+            </Container>
          );
     }
 }

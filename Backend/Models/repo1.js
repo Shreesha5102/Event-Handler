@@ -15,9 +15,6 @@ const repo1Schema = mongoose.Schema({
     certificate:{
         type: String
     }
-
-    
-
 });
 
 module.exports = mongoose.model('Repo',repo1Schema);

@@ -1,24 +1,34 @@
 import React, { Component } from 'react';
 //import css
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
+import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 
 //import components
 import Data from './components/Form';
 import Navmenu from './components/Navbar';
 import User from './components/User'
-import { Container } from 'react-bootstrap';
 import Content from './components/Content'
+import Contact from './components/Contact';
+import Display from './components/Display';
 
 
 class App extends Component {
     render() { 
         return ( 
-            <Container fluid> 
-                <Navmenu />
-                <User />
-                <Content/>
-            </Container>
+            <Router>
+                <Container fluid> 
+                    <Navmenu />
+                    <User />
+                    <Switch>
+                        <Route path="/" exact component={ Content } />
+                        <Route path="/add" exact component= { Data }/>
+                        <Route path="/view" exact component= { Display }/>
+                    </Switch>
+                    <Contact/>
+                </Container>
+            </Router>
          );
     }
 }

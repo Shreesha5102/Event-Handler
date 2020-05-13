@@ -31,8 +31,6 @@ body{
 }
 
 #user-info {
-  margin-left: 20% !important;
-  margin-right: 20% !important;
   color: #414246;
 }
 
@@ -40,4 +38,15 @@ body{
 #form {
   margin-left: 20% !important;
   margin-right: 20% !important;
+}
+
+.btn-light{
+  border-color: black;
+  box-shadow: 5px 5px grey;
+}
+
+#contact {
+  margin-top: 10% !important ;
+  background-color: #343a40;
+  color: whitesmoke;
 }

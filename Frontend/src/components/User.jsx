@@ -26,7 +26,6 @@ class User extends Component {
         fetch("http://localhost:4000/user/" + url)
         .then( res => res.json())
          .then( (data) => {
-             console.log(data);
              let date = new Date(data.date_of_joining);
              date = date.toDateString();
              this.setState({

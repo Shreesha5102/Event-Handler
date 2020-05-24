@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import {Form, Row, Col, FormControl, InputGroup, Button} from 'react-bootstrap';
+import { Modal, Button, Col, Row, Form, InputGroup, FormControl, } from 'react-bootstrap';
 
-class Data extends Component {
+
+class UpdModal extends Component {
     constructor(props) {
         super(props);
         this.state = { 
+            show: true,
             title: "",
             venue: "",
             date: "" ,
-            username: "Dr. Sandeep Verma N",
-            certificate: [],
+            certificate: []
          }
-    }
-
-    componentDidMount() {
     }
 
     handlechange = event => {
@@ -26,67 +24,37 @@ class Data extends Component {
 
     handleFileUpload = event => {
         let value = event.target.files[0];
-        document.getElementById("alert").innerHTML = value.name + " Selected"
-        document.getElementById("alert").style.display = "block"
         this.setState({
             certificate: value
         }, () =>{console.log(this.state.certificate)} );
     }
 
-    getDetails = (title, venue, date) => {
-            fetch("http://localhost:4000/repo/")
-            .then( res => res.json())
-             .then( (data) => {
-                console.log(data);
-                this.setState({
-                    title: title,
-                    venue: venue,
-                    date: date
-                });
-                console.log(this.state);
-            },
-            (error) => {
-                console.log(error);
-            })
+    handleClose = () => {
+        this.setState({
+            show: false
+        });
     }
 
-    postDetails = (event) => {
-        event.preventDefault();
-        console.log("Posting...");
-        const postData = new FormData();
-        postData.append("title", this.state.title); 
-        postData.append("venue", this.state.venue); 
-        postData.append("date", this.state.date); 
-        postData.append("certificate", this.state.certificate); 
-
-        fetch("http://localhost:4000/repo/" + this.state.username, {
-            method: 'POST',
-            body: postData
-        } )
-        .then(res => res.json())
-         .then( (data) => {
-             console.log(data);
-             
-             this.setState({
-                 title: data.title,
-                 venue: data.venue,
-                 date: data.date,
-                 certificate: data.certficate
-             })
-             this.getDetails(this.state.title, this.state.venue,  this.state.date);
-         },
-         (error) =>{
-             console.log(error);
-         })
-    
+    handleShow = () => {
+        this.setState({
+            show: true
+        });
     }
 
-    render() {
+    render() { 
         return ( 
-            <div id="form">
-                <Row>
-                    <h3>Enter the Details</h3>
-                </Row>
+            <Modal 
+                show={this.handleShow()} 
+                onHide={this.handleClose()} 
+                {...this.props}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Update this Post</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
                 <Form onSubmit={event => this.postDetails(event)}>
                     <Row>
                         <Col>
@@ -146,26 +114,17 @@ class Data extends Component {
                                 Select Certificate
                               </Form.File.Label>
                             </Form.File>
-                            <p id="alert" style={{display: "none"}}></p>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <Button type="Submit">Submit</Button>
                         </Col>
                     </Row>
                 </Form>
-            <div>
-                <p>
-                    {this.state.title}<br></br>
-                    {this.state.venue}<br></br>
-                    {this.state.date}
-                </p>
-            </div>
-            </div>
-
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" >Close</Button>
+                    <Button variant="primary" >Update</Button>
+                </Modal.Footer>
+            </Modal>
          );
     }
 }
  
-export default Data
+export default UpdModal;

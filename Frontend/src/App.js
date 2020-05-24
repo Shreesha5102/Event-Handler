@@ -12,6 +12,7 @@ import User from './components/User'
 import Content from './components/Content'
 import Contact from './components/Contact';
 import Display from './components/Display';
+import UpdModal from './components/UpdateModal';
 
 
 class App extends Component {
@@ -25,6 +26,7 @@ class App extends Component {
                         <Route path="/" exact component={ Content } />
                         <Route path="/add" exact component= { Data }/>
                         <Route path="/view" exact component= { Display }/>
+                        <Route path="/update" exact render= { UpdModal }/>
                     </Switch>
                     <Contact/>
                 </Container>

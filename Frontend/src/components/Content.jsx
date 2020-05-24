@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import {Row, Col, Button, Container} from 'react-bootstrap';
-import {BrowserRouter as Router, Switch, Route} from 'react-router';
 import { Link } from 'react-router-dom';
-import Data from './Form';
-
 class Content extends Component {
     constructor(props) {
         super(props);
@@ -18,7 +15,7 @@ class Content extends Component {
         return ( 
             <Container id="Content">
                 <Row>
-                    <h2></h2>
+                    <h2>Actions</h2>
                 </Row>
                 <Row>
                     <Col xs={4} md={4}>

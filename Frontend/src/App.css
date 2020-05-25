@@ -50,3 +50,18 @@ body{
   background-color: #343a40;
   color: whitesmoke;
 }
+
+.table th {
+  text-align: center;
+}
+
+.table td {
+  text-align: center;
+}
+.btn-toolbar {
+  justify-content: center;
+}
+
+.btn-secondary {
+  margin-left: 10px;
+}

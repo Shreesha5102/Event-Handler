@@ -13,7 +13,6 @@ class Display extends Component {
             events: [],
             folderId: "",
             eventId: "",
-            ids: [],
             show: false
          }
 
@@ -23,42 +22,29 @@ class Display extends Component {
         this.getEvents([]);
     }
 
-    getEvents = (ids) => {
+    getEvents = () => {
         fetch("http://localhost:4000/user/" + this.state.username)
         .then( res => res.json())
         .then(  data => {
             console.log("h");
             this.setState({
-                ids: ids,
                 events: data.events,
                 folderId: data._id,
             });
-            this.state.events.map((event) => {
-                this.setState(prevState => ({
-                    ids: [...prevState.ids, event._id]
-                }))
-            })
-            console.log(this.state.ids)
-            console.log(this.state.events)
         })
     }
 
-    deleteEvent = (event,i) => {
+    deleteEvent = (event,id) => {
         console.log("Deleting...");
-        console.log(this.state.ids);
-        fetch("http://localhost:4000/repo/" + this.state.folderId + "/" +  this.state.ids[i],{
+        console.log(id);
+        fetch("http://localhost:4000/repo/" + this.state.folderId + "/" + id,{
             method: "DELETE"
         })
         .then(
             res => {
                 console.log(res)
                 if(res.status === 200){
-                    var arr = [...this.state.ids];
-                    arr.splice(i,1);
-                    console.log(arr);
-                    this.setState({ids: arr});
-                    console.log(this.state.ids);
-                    this.getEvents(this.state.ids);
+                    this.getEvents();
                 }
         }
         )
@@ -77,7 +63,7 @@ class Display extends Component {
                             <th>Title</th>
                             <th>Venue</th>
                             <th>Date</th>
-                            <th></th>
+                            <th>Edit/Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,7 +73,7 @@ class Display extends Component {
                                     <td>{i+1}</td>
                                     <td>{event.title}</td>
                                     <td>{event.venue}</td>
-                                    <td>{event.date}</td>
+                                    <td>{event.date.slice(0,10)}</td>
                                     <td>
                                         <ButtonToolbar>
                                             <Button 
@@ -117,7 +103,7 @@ class Display extends Component {
                                                     <span></span>
                                                 )
                                             }
-                                            <Button variant="secondary" onClick={event => this.deleteEvent(event,i)}>
+                                            <Button variant="secondary" onClick={eve => this.deleteEvent(eve,event._id)}>
                                                 <i className="fa fa-trash" aria-hidden="true" ></i>
                                             </Button>  
                                         </ButtonToolbar>  
@@ -187,13 +173,6 @@ class MyVerticallyCenteredModal extends React.Component {
     updateEvent = (event) => {
         event.preventDefault();
        console.log("Updating...");
-//        const UpdateData = new FormData();
-//        UpdateData.append("title", this.state.title); 
-//        UpdateData.append("venue", this.state.venue); 
-//        UpdateData.append("date", this.state.date); 
-//        UpdateData.append("certificate", this.state.certificate); 
-//        console.log(UpdateData.entries());
-//
         fetch("http://localhost:4000/repo/" + this.state.folderId + "/" +  this.state.eventId, {
             method: 'PATCH',
             headers: {
@@ -211,6 +190,7 @@ class MyVerticallyCenteredModal extends React.Component {
              console.log(data);
              if(data.nModified === 1 && data.ok === 1){
                  this.props.onHide();
+                 window.location.reload(false);
              }
          },
          (error) =>{

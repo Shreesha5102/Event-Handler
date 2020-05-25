@@ -33,23 +33,6 @@ class Data extends Component {
         }, () =>{console.log(this.state.certificate)} );
     }
 
-    getDetails = (title, venue, date) => {
-            fetch("http://localhost:4000/repo/")
-            .then( res => res.json())
-             .then( (data) => {
-                console.log(data);
-                this.setState({
-                    title: title,
-                    venue: venue,
-                    date: date
-                });
-                console.log(this.state);
-            },
-            (error) => {
-                console.log(error);
-            })
-    }
-
     postDetails = (event) => {
         event.preventDefault();
         console.log("Posting...");
@@ -65,15 +48,11 @@ class Data extends Component {
         } )
         .then(res => res.json())
          .then( (data) => {
-             console.log(data);
-             
-             this.setState({
-                 title: data.title,
-                 venue: data.venue,
-                 date: data.date,
-                 certificate: data.certficate
-             })
-             this.getDetails(this.state.title, this.state.venue,  this.state.date);
+            console.log(data);
+            if(data.length > 0){
+                console.log(this.state);
+                window.location.reload(false);
+            }
          },
          (error) =>{
              console.log(error);
@@ -87,7 +66,7 @@ class Data extends Component {
                 <Row>
                     <h3>Enter the Details</h3>
                 </Row>
-                <Form onSubmit={event => this.postDetails(event)}>
+                <Form onSubmit={event => this.postDetails(event)} autoComplete="off">
                     <Row>
                         <Col>
                             <InputGroup className="mb-3">

@@ -1,32 +1,33 @@
-import React from 'react';
-import  image from '../images/logosmall.jpg'
+import React, { Component } from 'react';
+import {Navbar, Nav} from 'react-bootstrap';
+import logo from '../images/Logo.svg';
 
-class Navbar extends React.Component {
+class Navmenu extends Component {
     constructor(props) {
         super(props);
+        this.state = {  }
     }
-    render() {
-        return(
-            <nav class="navbar navbar-default navbar-fixed-top">
-                <div class="container">
-                  <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>                        
-                    </button>
-                    <a class="navbar-brand" href="#myPage"><img src={image} alt="Logo"/></a>
-                  </div>
-                  <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                    </ul>
-                  </div>
-                </div>
-            </nav>
-        );
-    }
+    render() { 
+        return ( 
+            <Navbar fixed="top" bg="dark" variant="dark">
+                    <Navbar.Brand href="#home">
+                      <img
+                        src={logo}                                                                            
+                        alt="Logo"
+                        height="30"
+                        width="30"
+                        className="d-inline-block align-top"
+                      />{' '}
+                      Bmsce 
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Nav className="mr-auto justify-content-end">
+                        <Nav.Link href="#deets">Sign-up</Nav.Link>
+                        <Nav.Link eventKey={2} href="#memes"><i className="fa fa-sign-out" aria-hidden="true"></i>Log-out</Nav.Link>
+                    </Nav>
+            </Navbar>
+         );
+    } 
 }
-
-export default Navbar;
+ 
+export default Navmenu;

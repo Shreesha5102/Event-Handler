@@ -11,10 +11,10 @@ const repo1Schema = mongoose.Schema({
     date:{
         type: Date,
         default: Date.now
+    },
+    certificate:{
+        type: String
     }
-
-    
-
 });
 
 module.exports = mongoose.model('Repo',repo1Schema);

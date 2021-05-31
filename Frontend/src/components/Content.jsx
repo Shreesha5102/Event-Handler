@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Row, Col, Button, Container} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Display from './Display';
+
 class Content extends Component {
     constructor(props) {
         super(props);
@@ -15,26 +17,25 @@ class Content extends Component {
         return ( 
             <Container id="Content">
                 <Row>
-                    <h2>Actions</h2>
+                    <Col>
+                        <h2>Welcome To Your Personal Space</h2>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Display />
+                    </Col>
                 </Row>
                 <Row>
                     <Col xs={4} md={4}>
                     </Col>
                     <Col xs={4} md={4}>
                         <Row>
-                            <Col xs={6} md={6}>
+                            <Col xs={12} md={12}>
                                 <Link style={linkStyle} to="/add">
                                     <Button variant="light"> 
-                                        <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i><br></br>
+                                        <i className="fa fa-plus-circle fa-2x" aria-hidden="true"></i><br></br>
                                         Add Events
-                                    </Button>
-                                </Link>
-                            </Col>
-                            <Col xs={6} md={6}>
-                                <Link style={linkStyle} to="/view">
-                                    <Button variant="light"> 
-                                        <i class="fa fa-eye fa-2x" aria-hidden="true"></i><br></br>
-                                        View Events
                                     </Button>
                                 </Link>
                             </Col>
@@ -44,6 +45,7 @@ class Content extends Component {
                     </Col>
                     
                 </Row>
+
             </Container>
          );
     }

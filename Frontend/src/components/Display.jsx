@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import download from 'downloadjs';
+import axios from 'axios';
 import { Container, Button } from 'react-bootstrap';
 import { Table } from 'react-bootstrap';
 import { Modal, Col, Row, Form, InputGroup, FormControl, ButtonToolbar} from 'react-bootstrap';
@@ -26,13 +28,30 @@ class Display extends Component {
         fetch("http://localhost:4000/user/" + this.state.username)
         .then( res => res.json())
         .then(  data => {
-            console.log("h");
+            console.log({data});
             this.setState({
                 events: data.events,
                 folderId: data._id,
             });
         })
     }
+
+    downloadFile = async (id, path, mimetype) => {
+        try {
+          const result = await axios.get(`http://localhost:4000/repo/download/${this.state.username}/${id}`, {
+            responseType: 'blob'
+          });
+          const split = path.split('/');
+          const filename = split[split.length - 1];
+          const mimetype1 = mimetype.split('/');
+          const mimetype2 = mimetype1[mimetype1.length-1];
+          return download(result.data, filename, mimetype2);
+        } catch (error) {
+          if (error.response && error.response.status === 400) {
+            console.log('Error while downloading file. Try again later');
+          }
+        }
+      };
 
     deleteEvent = (event,id) => {
         console.log("Deleting...");
@@ -63,6 +82,7 @@ class Display extends Component {
                             <th>Title</th>
                             <th>Venue</th>
                             <th>Date</th>
+                            <th>Certficate</th>
                             <th>Edit/Delete</th>
                         </tr>
                     </thead>
@@ -74,6 +94,10 @@ class Display extends Component {
                                     <td>{event.title}</td>
                                     <td>{event.venue}</td>
                                     <td>{event.date.slice(0,10)}</td>
+                                    <td><a href="#/" onClick={()=> this.downloadFile(event._id, event.certificate,event.certficiate_mimetype)}>
+                                            Download Certificate
+                                        </a>
+                                    </td>
                                     <td>
                                         <ButtonToolbar>
                                             <Button 
@@ -276,11 +300,6 @@ class MyVerticallyCenteredModal extends React.Component {
                             </Col>
                         </Row>
                         <div>
-                <p>
-                    {this.state.title}<br></br>
-                    {this.state.venue}<br></br>
-                    {this.state.date}
-                </p>
             </div>
 				</Modal.Body>
 				<Modal.Footer>

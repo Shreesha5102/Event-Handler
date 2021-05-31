@@ -120,6 +120,7 @@ class Data extends Component {
                             <Form.File id="formcheck-api-custom" custom>
                               <Form.File.Input 
                                 onChange={event => {this.handleFileUpload(event)}}
+                                accept='application/pdf,.jpg,.png,.jpeg'
                               />
                               <Form.File.Label data-browse="Choose">
                                 Select Certificate
@@ -134,13 +135,6 @@ class Data extends Component {
                         </Col>
                     </Row>
                 </Form>
-            <div>
-                <p>
-                    {this.state.title}<br></br>
-                    {this.state.venue}<br></br>
-                    {this.state.date}
-                </p>
-            </div>
             </div>
 
          );

@@ -15,6 +15,9 @@ var repo1Schema = mongoose.Schema({
     },
     certificate:{
         type: String
+    },
+    certificate_mimetype:{
+        type: String
     }
 });
 

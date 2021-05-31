@@ -9,6 +9,14 @@ const storage = multer.diskStorage({
     },
     filename: function(req, file, cb) {
         cb(null, file.originalname );
+    },
+    fileFilter: function(req,file,cb){
+        if(!file.originalname.match(/\.(jpeg|jpg|png|pdf)$/)){
+            return cb(
+                new console.error("upload only pdf,jpeg,png files")
+            );
+        }
+        cb(undefined,true);
     }
 });
 const uploads = multer( {
@@ -32,7 +40,8 @@ router.post('/:username', uploads.single('certificate'), async (req,res) => {
         title: req.body.title,
         venue: req.body.venue,
         date: req.body.date,
-        certificate: req.file.path
+        certificate: req.file.path,
+        certificate_mimetype: req.file.mimetype
         };
    try{
         console.log("Posted");
@@ -50,6 +59,28 @@ router.post('/:username', uploads.single('certificate'), async (req,res) => {
        res.json({message: err});
    }
 });
+
+
+router.get('/download/:username/:id', async (req, res) => {
+    try {
+        const user = repo1.findOne( { username: req.params.username })
+        const file = user.events.map(function(event){
+                if(event._id === req.params.id){
+                    return {event};
+                }
+            }       
+        );
+        console.log(user);
+        console.log(file);
+        res.set({
+            'Content-Type': file.certificate_mimetype
+        });
+        res.sendFile(path.join(__dirname, '..', file.certificate));
+    } catch (error) {
+      res.status(400).send('Error while downloading file. Try again later.');
+    }
+  });
+
 router.get('/:postId',async (req,res)=>{
     try{
         const post= await repo1.findOne({ "_id":req.params.postId});
@@ -60,6 +91,7 @@ router.get('/:postId',async (req,res)=>{
     
 
  });
+
 router.delete('/:postId/:eventId',async (req,res)=>{
     try{
         const removedpost = await repo1.findById( req.params.postId);
@@ -72,9 +104,8 @@ router.delete('/:postId/:eventId',async (req,res)=>{
     } catch (err) {
         res.json({ message: err});
     }
-    
-
  });
+
  router.patch('/:postId/:eventId', uploads.single('certificate'), async (req,res)=>{
     try{
         console.log(req.body);
@@ -92,7 +123,6 @@ router.delete('/:postId/:eventId',async (req,res)=>{
     } catch (err) {
         res.json({ message: err});
     }
-    
-
  });
+
 module.exports=router;
